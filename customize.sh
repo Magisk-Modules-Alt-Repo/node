@@ -39,12 +39,10 @@ fi
 #for i in {16..21} {21..16} ; do ui_print "\e[38;5;${i}m#\e[0m" ; done ; ui_print
 systemWrite true
 
-arr=( "transfer" "zip" "bash" "wget" "aapt" "pip" "python" "node" "yarn" "systemWrite" ""  )
-
-for item in "${arr[@]}"
+for bin in transfer zip bash wget aapt pip python node yarn systemWrite
 do
     #ui_print "\e[38;5;82mMaking \e[34m${item} \e[38;5;198mExecuteable"
-    ui_print "Making ${item} Executeable"
+    ui_print "* Making ${item} Executeable"
     chmodBin $item
 done
 
