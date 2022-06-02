@@ -21,10 +21,12 @@ Module can be downloaded from [FoxMMM][foxmmm] or [MMRL][mmrl]. The instalation 
 - `zip`
 - `bash`
 - `wget`
+- `python` (Please read extra setup)
+- `pip` (Please read extra setup)
 - `aapt`
-- `node` (only version 9)
-- `yarn` (npm nor works, yarn works not at all)
-- `systemWrite` (an script to make the system writeable, be secure with `yarn`)
+- `node` (Only Node 9)
+- `yarn` (`npm` not works, `yarn` works not at all)
+- `systemWrite` (An script to make the system writeable, be secure with `yarn`)
 
 ## Binary's that needs extra setup
 
