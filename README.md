@@ -13,7 +13,7 @@ This is an module that's includes many binary's, listed are below
 
 ## Installation
 
-Module can be downloaded from [FoxMMM][foxmmm] or [MMRL][mmrl]. The instalation should be always be in [FoxMMM][foxmmm], for [ANSIText][ansi] support.
+Module can be downloaded from [FoxMMM][foxmmm] or [MMRL][mmrl]. The instalation should be always be in [FoxMMM][foxmmm], for ~[ANSI][ansi] text support~.
 
 ## Binary's
 
