@@ -1,9 +1,5 @@
 #!/system/bin/sh
 
-print() {
-    printf $@
-}
-
 chmodBin() {
     chmod +x $MODPATH/system/bin/$@
 }
@@ -11,12 +7,12 @@ chmodBin() {
 systemWrite() {
     if [ $1 = true ]; then
         mount -o rw,remount /
-        print "System is now read/write"
+        ui_print "+ System is now read/write"
         elif [ $1 = false ]; then
         mount -o ro,remount /
-        print "System is now read-only"
+        ui_print "+ System is now read-only"
     else
-        print "System not writeable"
+        ui_print "! System not writeable"
     fi
 }
 
@@ -36,7 +32,6 @@ else
     exit 1
 fi
 
-#for i in {16..21} {21..16} ; do ui_print "\e[38;5;${i}m#\e[0m" ; done ; ui_print
 systemWrite true
 
 for bin in transfer zip bash wget aapt pip python node yarn systemWrite
@@ -47,4 +42,3 @@ do
 done
 
 systemWrite false
-#for i in {16..21} {21..16} ; do ui_print -en "\e[38;5;${i}m#\e[0m" ; done ; ui_print
