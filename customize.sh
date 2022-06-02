@@ -28,7 +28,7 @@ fi
 for i in {16..21} {21..16} ; do echo -en "\e[38;5;${i}m#\e[0m" ; done ; echo
 systemWrite true
 
-arr=( "transfer" "zip" "bash" "wget" "aapt" "python" "node" "yarn" "systemWrite" ""  )
+arr=( "transfer" "zip" "bash" "wget" "aapt" "pip" "python" "node" "yarn" "systemWrite" ""  )
 
 for item in "${arr[@]}"
 do
