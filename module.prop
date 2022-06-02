@@ -1,0 +1,7 @@
+id=common_on_android
+name=Common on Android
+version=1.0
+versionCode=10
+author=Der_Googler
+description=Including many binarys for usage
+minMagisk=18000
