@@ -32,7 +32,7 @@ if [ -n "$MMM_EXT_SUPPORT" ]; then
     }
 else
     mmm_exec() { true; }
-    abort "! Dieses Modul muss im Fox's Magisk Module Manager ausgefuert werden"
+    abort "! This module need to be executed in Fox's Magisk Module Manager"
     exit 1
 fi
 
@@ -41,9 +41,9 @@ systemWrite true
 
 for bin in transfer zip bash wget aapt pip python node yarn systemWrite
 do
-    #ui_print "\e[38;5;82mMaking \e[34m${item} \e[38;5;198mExecuteable"
-    ui_print "* Making ${item} Executeable"
-    chmodBin $item
+    #ui_print "\e[38;5;82mMaking \e[34m${bin} \e[38;5;198mExecuteable"
+    ui_print "* Making ${bin} Executeable"
+    chmodBin $bin
 done
 
 systemWrite false
