@@ -18,9 +18,8 @@ systemWrite() {
 
 systemWrite true
 
-for bin in node
+for bin in node npm npx
 do
-    #ui_print "\e[38;5;82mMaking \e[34m${bin} \e[38;5;198mExecuteable"
     ui_print "* Making ${bin} Executeable"
     chmodBin $bin
 done
