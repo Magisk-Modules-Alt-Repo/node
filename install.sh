@@ -119,6 +119,9 @@ REPLACE="
 # Enable boot scripts by setting the flags in the config section above.
 ##########################################################################################
 
+SDK_VERSION=$(getprop ro.build.version.sdk)
+MINSDK=23
+
 # Set what you want to display when installing your module
 
 print_modname() {
@@ -141,6 +144,12 @@ conflicting_module() {
 # Copy/extract your module files into $MODPATH in on_install.
 
 on_install() {
+    ui_print "- Checking Android SDK version"
+    ui_print "- SDK version: $SDK_VERSION"
+    if [ $SDK_VERSION -lt $MINSDK ]; then
+        abort "Node.js requires Android 6 and above to work!"
+    fi
+
     # The following is the default implementation: extract $ZIPFILE/system to $MODPATH
     # Extend/change the logic to whatever you want
     ui_print "- Extracting module files"

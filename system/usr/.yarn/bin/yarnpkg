@@ -1,2 +1,2 @@
 #!/system/bin/env node
-require('./yarn.js');
+require("./yarn.js");

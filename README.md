@@ -10,6 +10,7 @@
 
 ## Information
 
+- Do not update `yarn` itself. This can break the functionality.
 - Do not use `npm`, you can install it via `yarn global add npm`, but `npm` isn't right configured for Android root usage.
 - Please don't execute global installed binaries on boot. This module need link `/system` to `/usr` first!
 - This module uses an own `mkshrc` file, this causes problems with some other modules, like Terminal modifications or Systemless mkshrc. Be uninstalling these modules before using this!
@@ -32,7 +33,7 @@ or this
 
 ## Installation
 
-Node.js version: 14.16.0
+Node.js version: 16.15.1
 Yarn version: 1.22.19
 
 Module can be downloaded from [FoxMMM][foxmmm] or [MMRL][mmrl]. The instalation should be always be in [FoxMMM][foxmmm], for ~[ANSI][ansi] text support~.

@@ -1,5 +1,4 @@
 #!/system/bin/sh
-HOME=$YARN_HOME
 argv0=$(echo "$0" | sed -e 's,\\,/,g')
 basedir=$(dirname "$(readlink "$0" || echo "$argv0")")
 

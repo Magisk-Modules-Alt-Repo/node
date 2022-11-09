@@ -1,5 +1,8 @@
 #!/system/bin/env node
 
+// Override $HOME on every execute. Do not override global $HOME variable!
+process.env.HOME = process.env.YARN_HOME;
+
 /* eslint-disable no-var */
 /* eslint-disable flowtype/require-valid-file-annotation */
 'use strict';
