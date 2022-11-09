@@ -19,5 +19,4 @@ PS1='${|
 }$USER@$HOSTNAME:${PWD:-?} '"$PS1 "
 
 export TERM=xterm-256color
-export YARN_HOME=/system/usr
-export PATH="$YARN_HOME/.yarn/bin:$YARN_HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="/system/local/share/.yarn/bin:/data/local/.config/yarn/global/node_modules/.bin:$PATH"

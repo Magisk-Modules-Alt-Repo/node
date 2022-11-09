@@ -119,9 +119,6 @@ REPLACE="
 # Enable boot scripts by setting the flags in the config section above.
 ##########################################################################################
 
-SDK_VERSION=$(getprop ro.build.version.sdk)
-MINSDK=23
-
 # Set what you want to display when installing your module
 
 print_modname() {
@@ -135,7 +132,9 @@ print_modname() {
     ui_print "======================================="
 }
 
-YARN_HOME=/system/usr
+YARN_HOME=/system/local/share
+SDK_VERSION=$(getprop ro.build.version.sdk)
+MINSDK=23
 
 conflicting_module() {
     [ -d "/data/adb/modules/$1" ] && abort "$2 is installed, please remove it to use Node.js"
@@ -180,9 +179,9 @@ set_permissions() {
     # The following is the default rule, DO NOT remove
     set_perm_recursive $MODPATH 0 0 0755 0644
     set_perm $MODPATH/system/bin/node 0 0 0777
-    set_perm $MODPATH/system/usr/.yarn/bin/yarn 0 0 0777
-    set_perm $MODPATH/system/usr/.yarn/bin/yarn.js 0 0 0777
-    set_perm $MODPATH/system/usr/.yarn/bin/yarnpkg 0 0 0777
+    set_perm $MODPATH/$YARN_HOME/.yarn/bin/yarn 0 0 0777
+    set_perm $MODPATH/$YARN_HOME/.yarn/bin/yarn.js 0 0 0777
+    set_perm $MODPATH/$YARN_HOME/.yarn/bin/yarnpkg 0 0 0777
 
     # Here are some examples:
     # set_perm_recursive  $MODPATH/system/lib       0     0       0755      0644

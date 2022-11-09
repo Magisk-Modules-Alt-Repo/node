@@ -10,6 +10,7 @@
 
 ## Information
 
+- `node-gyp` isn't available. Someone need to ports `python`
 - Do not update `yarn` itself. This can break the functionality.
 - Do not use `npm`, you can install it via `yarn global add npm`, but `npm` isn't right configured for Android root usage.
 - Please don't execute global installed binaries on boot. This module need link `/system` to `/usr` first!
