@@ -163,8 +163,8 @@ on_install() {
     ln -sf node "$MODPATH/system/bin/nodejs"
     ln -sf node "$MODPATH/system/bin/NODE"
     ln -sf node "$MODPATH/system/bin/Node"
-    ui_print "Linking mkshrc to bashrc"
-    ln -sf "$MODPATH/system/etc/mkshrc" "$MODPATH/system/etc/bash/bashrc"
+    ui_print "- Linking mkshrc to bashrc"
+    ln -s "$MODPATH/system/etc/mkshrc" "$MODPATH/system/etc/bash/bashrc"
 
     ui_print "- Successfully installed Yarn"
     version=$($YARN_HOME/.yarn/bin/yarn --version) || (
