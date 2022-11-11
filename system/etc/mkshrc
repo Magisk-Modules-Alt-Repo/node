@@ -6,18 +6,12 @@
 #
 # Support: https://launchpad.net/mksh
 
-set +o nohup
+if (( USER_ID )); then PS1='$'; else PS1='#'; fi
 
-if ((USER_ID)); then PS1='$'; else PS1='#'; fi
-PS4='[$EPOCHREALTIME] '
-PS1='${|
-	local e=$?
+PS1='$HOSTNAME@$USER:${PWD:-?} '"$PS1 "
 
-	(( e )) && REPLY+="$e|"
-
-	return $e
-}$USER@$HOSTNAME:${PWD:-?} '"$PS1 "
-
-export sudo='su -c "$@"'
-export TERM=xterm-256color
+export sudo="su -c \"$@\""
+export bsudo="su --s bash c \"$@\""
+export TERM="xterm-256color"
+export yarng="yarn global $@"
 export PATH="/system/local/share/.yarn/bin:/data/local/.config/yarn/global/node_modules/.bin:$PATH"
