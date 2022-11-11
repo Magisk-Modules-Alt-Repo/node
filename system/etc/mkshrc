@@ -18,5 +18,6 @@ PS1='${|
 	return $e
 }$USER@$HOSTNAME:${PWD:-?} '"$PS1 "
 
+export sudo='su -c "$@"'
 export TERM=xterm-256color
 export PATH="/system/local/share/.yarn/bin:/data/local/.config/yarn/global/node_modules/.bin:$PATH"
