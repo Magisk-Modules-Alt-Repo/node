@@ -32,6 +32,24 @@ or this
 
 > `/system` is linked to `/usr` which makes it possible to execute `npm` or `nodemon`
 
+## Addons
+
+You can install binaries without an reboot, just run
+
+```shell
+# yarng is an alias of yarn global
+yarng add android-addons
+```
+
+Get access to following binaries:
+
+- bash
+- neofetch
+- zip
+- wget
+- xh
+- aapt
+
 ## Installation
 
 Node.js version: 16.15.1
