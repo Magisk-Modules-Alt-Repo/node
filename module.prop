@@ -1,6 +1,6 @@
 id=node_on_android
 name=Node.js
-version=1.0.6
-versionCode=106
+version=1.0.7
+versionCode=107
 author=Der_Googler
 description=Running Node.js on a Android device

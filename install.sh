@@ -163,8 +163,6 @@ on_install() {
     ln -sf node "$MODPATH/system/bin/nodejs"
     ln -sf node "$MODPATH/system/bin/NODE"
     ln -sf node "$MODPATH/system/bin/Node"
-    ui_print "- Linking mkshrc to bashrc"
-    ln -s "$MODPATH/system/etc/mkshrc" "$MODPATH/system/etc/bash/bashrc"
 
     ui_print "- Successfully installed Yarn"
     version=$($YARN_HOME/.yarn/bin/yarn --version) || (
@@ -181,7 +179,6 @@ set_permissions() {
     # The following is the default rule, DO NOT remove
     set_perm_recursive $MODPATH 0 0 0755 0644
     set_perm $MODPATH/system/bin/node 0 0 0777
-    set_perm $MODPATH/system/bin/bash 0 0 0777
     set_perm $MODPATH/$YARN_HOME/.yarn/bin/yarn 0 0 0777
     set_perm $MODPATH/$YARN_HOME/.yarn/bin/yarn.js 0 0 0777
     set_perm $MODPATH/$YARN_HOME/.yarn/bin/yarnpkg 0 0 0777
