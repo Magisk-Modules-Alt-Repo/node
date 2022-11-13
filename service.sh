@@ -6,7 +6,7 @@ MODDIR=${0%/*}
 # This is required because "#!/usr/bin/env node" cannot loaded.
 ln -s -T /system /usr
 # Softlink /data/local/.config to /.config to avoid install or configuration issues
-ln -s -T /data/local/.config /.config
+ln -s /data/local/.config /.config
 
 
 # This script will be executed in late_start service mode
