@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/system/bin/env node
 
 /* eslint-disable no-var */
 /* eslint-disable flowtype/require-valid-file-annotation */

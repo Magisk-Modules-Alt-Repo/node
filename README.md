@@ -16,6 +16,20 @@
 - Please don't execute global installed binaries on boot. This module need link `/system` to `/usr` first!
 - This module uses an own `mkshrc` file, this causes problems with some other modules, like Terminal modifications or Systemless mkshrc. Be uninstalling these modules before using this!
 
+## Global Binaries
+
+You can install binaries from NPM, you can use the following commands to install global libraries
+
+```shell
+# yarng is an alias of `yarn global`
+yarng add com.googler.bash
+
+# ot use like this
+yarn global add com.googler.bash
+```
+
+> There are more addons like `bash`! You can also install `neofetch`!
+
 ## Module development
 
 If you want develop global libraries for usage use please:
@@ -31,24 +45,6 @@ or this
 ```
 
 > `/system` is linked to `/usr` which makes it possible to execute `npm` or `nodemon`
-
-## Addons
-
-You can install binaries without an reboot, just run
-
-```shell
-# yarng is an alias of yarn global
-yarng add android-addons
-```
-
-Get access to following binaries:
-
-- bash
-- neofetch
-- zip
-- wget
-- xh
-- aapt
 
 ## Installation
 
