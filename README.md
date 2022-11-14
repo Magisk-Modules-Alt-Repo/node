@@ -1,7 +1,15 @@
 [nodejs]: https://nodejs.org/en/
 [foxmmm]: https://github.com/Fox2Code/FoxMagiskModuleManager
 
-<p align="center"><img width="140" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1920px-Node.js_logo.svg.png"></p>
+<p align="center">
+  <a href="https://nodejs.org/">
+    <img
+      alt="Node.js"
+      src="https://nodejs.org/static/images/logo-light.svg"
+      width="400"
+    />
+  </a>
+</p>
 
 # Node.js
 
