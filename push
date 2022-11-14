@@ -1,0 +1,40 @@
+#!/bin/bash
+
+printf "Building Magisk module\n"
+# Make module.zip
+file="$(cat /dev/urandom | tr -dc '[:alpha:]' | fold -w ${1:-20} | head -n 1).zip"
+rm -f "$file"
+zip -r "$file" ./*
+
+ADB=$(adb devices | awk 'NR>1 {print $1}')
+if test -n "$ADB"; then
+    (# Isolate
+        function magisk() {
+            adb shell su -c "magisk $@"
+        }
+
+        function push() {
+            adb push $@
+        }
+
+        function rm() {
+            adb shell "rm $@"
+        }
+
+        printf "Push $file to $ADB\n"
+        push "$PWD/$file" "/data/local/tmp"
+
+        printf "Installing $file module on $ADB\n"
+        magisk --install-module "/data/local/tmp/$file"
+
+        printf "Remove $file from device\n"
+        rm -f "/data/local/tmp/$file"
+    )
+else
+    printf "Can't install module via adb\n"
+    exit $?
+fi
+
+# Remove zip after installation
+printf "Remove $file from computer\n"
+rm -f "$file"

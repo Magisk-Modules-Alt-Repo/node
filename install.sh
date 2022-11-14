@@ -128,7 +128,7 @@ print_modname() {
     ui_print "           Running Node.js on          "
     ui_print "            a Android device           "
     ui_print "---------------------------------------"
-    ui_print " https://github.com/Googlers-Repo/node "
+    ui_print "      Magisk-Modules-Alt-Repo/node     "
     ui_print "======================================="
 }
 
@@ -137,7 +137,7 @@ SDK_VERSION=$(getprop ro.build.version.sdk)
 MINSDK=23
 
 conflicting_module() {
-    [ -d "/data/adb/modules/$1" ] && abort "$2 is installed, please remove it to use Node.js"
+   [ -d "/data/adb/modules/$1" ] && abort "$2 is installed, please remove it to use Node.js"
 }
 
 # Copy/extract your module files into $MODPATH in on_install.
