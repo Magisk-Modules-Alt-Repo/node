@@ -16,6 +16,22 @@
 **Disclaimer**  
 [Node.js][nodejs] are able to read and write the entire system, I'm not responsible for any stolen data, accounts or something. Install it at your own rist!
 
+# Important!
+
+Since version `1.0.9` you're requiring mutiple users. If you get an install error, run `pm get-max-users`, it should display more than 2 users. If not run `setprop fw.max_users 10` and re-try the install.
+
+## Deleting old files from version 1.0.8 and below
+
+These files can deleted safely:
+
+```
+/yarn.lock
+/data/local/.yarnrc
+/data/local/.cache
+/data/local/.config
+/data/local/.yarn
+```
+
 ## Information
 
 - `node-gyp` isn't available. Someone need to ports `python`

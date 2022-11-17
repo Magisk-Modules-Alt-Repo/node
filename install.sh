@@ -132,7 +132,7 @@ print_modname() {
     ui_print "======================================="
 }
 
-YARN_HOME=/system/local/share
+YARN_HOME=/system/usr/share
 SDK_VERSION=$(getprop ro.build.version.sdk)
 MINSDK=23
 
@@ -180,6 +180,7 @@ set_permissions() {
     set_perm_recursive $MODPATH 0 0 0755 0644
     set_perm $MODPATH/system/bin/node 0 0 0777
     set_perm $MODPATH/$YARN_HOME/.yarn/bin/yarn 0 0 0777
+    set_perm $MODPATH/$YARN_HOME/.yarn/bin/yarng 0 0 0777
     set_perm $MODPATH/$YARN_HOME/.yarn/bin/yarn.js 0 0 0777
     set_perm $MODPATH/$YARN_HOME/.yarn/bin/yarnpkg 0 0 0777
 
