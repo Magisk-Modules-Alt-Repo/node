@@ -19,9 +19,9 @@ PS1=$(echo -e "\e[35m┌\e[0m\e[92m$USER@localhost\e[0m:\e[34m${PWD:-?}\e[0m\n\e
 # export PREFIX=/system
 export CURRENT_USER="$CURRENT_USER"
 export TMPDIR="/data/local/tmp"
-export YARN_HOMR="/system/usr/share"
+export YARN_HOME="/system/usr/share"
 export TERM="xterm-256color"
-export PATH="$YARN_HOMR/.yarn/bin:$HOMR/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$YARN_HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # Aliases
 alias bsu='su -s bash'
