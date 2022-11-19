@@ -13,8 +13,20 @@ done
 # Sleep an additional 20s to ensure init is finished
 sleep 20
 
+mount_error() {
+  su -lp 2000 -c "cmd notification post -S bigtext -t 'Node.js Service Mount Error' 'Tag' 'There was an errer while mounting your system as read-write or read-only.'"
+}
+
+link_error() {
+  su -lp 2000 -c "cmd notification post -S bigtext -t 'Node.js Symlink Error' 'Tag' 'There was an error while linking /system to /usr. You running probably an read-only system.'"
+}
+
 # This is required because "#!/usr/bin/env node" cannot loaded.
-ln -s -T /system /usr
+if [ ! -d "/usr" ]; then
+  mount -o rw,remount / || mount_error
+  ln -s -T /system /usr || link_error
+  mount -o ro,remount / || mount_error
+fi
 
 # This script will be executed in late_start service mode
 # More info in the main Magisk thread
