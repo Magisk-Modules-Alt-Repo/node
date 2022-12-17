@@ -18,7 +18,7 @@
 
 # Important!
 
-Since version `1.0.9` you're requiring mutiple users. If you get an install error, run `pm get-max-users`, it should display more than 2 users. If not run `setprop fw.max_users 10` and re-try the install.
+Since version `1.1.4` requires this module [Systemless mksh.rc](https://github.com/Magisk-Modules-Alt-Repo/mkshrc) to be installed.
 
 ## Information
 
