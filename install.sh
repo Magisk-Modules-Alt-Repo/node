@@ -136,10 +136,17 @@ YARN_HOME=/system/usr/share
 SDK_VERSION=$(getprop ro.build.version.sdk)
 MINSDK=23
 
-conflicting_module() {
-   [ -d "/data/adb/modules/$1" ] && abort "$2 is installed, please remove it to use Node.js"
+require_modules() {
+    for module in $@; do
+        [ ! -d "/data/adb/modules/$module" ] && echo "/data/adb/modules/$module is missing, please install it to use this module."
+    done
 }
 
+conflicting_modules() {
+    for module in $@; do
+        [ -d "/data/adb/modules/$module" ] && echo "/data/adb/modules/$module is installed, please remove it to use this module."
+    done
+}
 # Copy/extract your module files into $MODPATH in on_install.
 
 on_install() {
@@ -155,8 +162,8 @@ on_install() {
     unzip -o "$ZIPFILE" 'system/*' -d $MODPATH >&2
 
     # Check if one of conflicting modules is installed
-    conflicting_module "mkshrc" "Systemless mkshrc"
-    conflicting_module "terminalmods" "Terminal Modifications"
+    conflicting_modules terminalmods
+    require_modules mkshrc
 
     # Symbolic link for lowercase/UPPERCASE support in terminal
     [ -d "$MODPATH/system/bin/" ] || mkdir -p "$MODPATH/system/bin/"

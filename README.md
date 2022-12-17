@@ -20,20 +20,9 @@
 
 Since version `1.0.9` you're requiring mutiple users. If you get an install error, run `pm get-max-users`, it should display more than 2 users. If not run `setprop fw.max_users 10` and re-try the install.
 
-## Deleting old files from version 1.0.8 and below
-
-These files can deleted safely:
-
-```
-/yarn.lock
-/data/local/.yarnrc
-/data/local/.cache
-/data/local/.config
-/data/local/.yarn
-```
-
 ## Information
 
+- Some binaries can't be used when `/system` it not linked into `/usr`. You need to charge from `#!/usr/bin/env node` to `#!/system/bin/env node`
 - `node-gyp` isn't available. Someone need to ports `python`
 - Do not update `yarn` itself. This can break the functionality.
 - Do not use `npm`, you can install it via `yarn global add npm`, but `npm` isn't right configured for Android root usage.
