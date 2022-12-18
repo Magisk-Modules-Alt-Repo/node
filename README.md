@@ -25,23 +25,22 @@ Since version `1.1.4` requires this module [Systemless mksh.rc](https://github.c
 - Some binaries can't be used when `/system` it not linked into `/usr`. You need to charge from `#!/usr/bin/env node` to `#!/system/bin/env node`
 - `node-gyp` isn't available. Someone need to ports `python`
 - Do not update `yarn` itself. This can break the functionality.
-- Do not use `npm`, you can install it via `yarn global add npm`, but `npm` isn't right configured for Android root usage.
+<!-- - Do not use `npm`, you can install it via `yarn global add npm`, but `npm` isn't right configured for Android root usage.-->
 - Please don't execute global installed binaries on boot. This module need link `/system` to `/usr` first!
-- This module uses an own `mkshrc` file, this causes problems with some other modules, like Terminal modifications or Systemless mkshrc. Be uninstalling these modules before using this!
+- This module uses an own `mkshrc` file, this causes problems with some other modules, like Terminal modifications. Be uninstalling these modules before using this!
 
-## Global Binaries
+## Installing NPM
 
-You can install binaries from NPM, you can use the following commands to install global libraries
+Since 1.1.4 NPM is useable!
 
 ```shell
-# yarng is an alias of `yarn global`
-yarng add com.googler.bash
+# Install npm via yarn
+yarn global add npm
 
-# ot use like this
-yarn global add com.googler.bash
+# npm will only works when /system is into /usr linked
+# If not - you have to change from "#!/usr/bin/env node" to "#!/system/bin/env node"
+nano $(realpath $(which npm))
 ```
-
-> There are more addons like `bash`! You can also install `neofetch`!
 
 ## Module development
 
@@ -51,7 +50,7 @@ If you want develop global libraries for usage use please:
 #!/system/bin/env node
 ```
 
-or this
+or this (not recommended)
 
 ```shell
 #!/usr/bin/env node
@@ -64,7 +63,7 @@ or this
 Node.js version: 16.15.1
 Yarn version: 1.22.19
 
-Module can be downloaded from [FoxMMM][foxmmm] or [MMRL][mmrl]. The instalation should be always be in [FoxMMM][foxmmm], for ~[ANSI][ansi] text support~.
+Module can be downloaded from [FoxMMM][foxmmm] or [MMRL][mmrl]. The instalation should be always be in [FoxMMM][foxmmm].
 
 **Included binaries**
 
