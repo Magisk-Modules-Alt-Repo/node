@@ -1,6 +1,10 @@
 id=node_on_android
 name=Node.js
-version=1.1.7
-versionCode=117
+version=1.2.0
+versionCode=120
 author=Der_Googler
 description=Running Node.js on a Android device
+minApi=23
+needRamdisk=false
+support=https://github.com/Magisk-Modules-Alt-Repo/node
+changeBoot=false
