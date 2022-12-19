@@ -1,7 +1,7 @@
 id=node_on_android
 name=Node.js
-version=1.2.0
-versionCode=120
+version=1.2.1
+versionCode=121
 author=Der_Googler
 description=Running Node.js on a Android device
 minApi=23
