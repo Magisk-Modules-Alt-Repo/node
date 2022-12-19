@@ -5,7 +5,7 @@ notify() {
 }
 
 TITLE="Node.js Service Startup"
-SPATH="/data/chuser/root/etc/node.d"
+SPATH="/data/chuser/root/usr/etc/node.d"
 
 while [[ `getprop sys.boot_completed` -ne 1 ]]
 do
