@@ -31,7 +31,7 @@ Since version `1.1.4` requires this module [Systemless mksh.rc](https://github.c
 
 ## Running service files
 
-Files must be located in `/sdcard/Documents/Node` and running on every boot after 2 minutes.
+Files must be located in `/data/chusrer/<USER>/usr/etc/node.d` and running on every boot after 2 minutes.
 
 ## Installing NPM
 

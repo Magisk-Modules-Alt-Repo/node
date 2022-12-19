@@ -5,7 +5,7 @@ notify() {
 }
 
 TITLE="Node.js Service Startup"
-SPATH="/sdcard/Documents/Node"
+SPATH="$PREFIX/etc/node.d"
 
 while [[ `getprop sys.boot_completed` -ne 1 ]]
 do
