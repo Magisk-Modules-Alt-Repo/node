@@ -29,6 +29,10 @@ Since version `1.1.4` requires this module [Systemless mksh.rc](https://github.c
 - Please don't execute global installed binaries on boot. This module need link `/system` to `/usr` first!
 - This module uses an own `mkshrc` file, this causes problems with some other modules, like Terminal modifications. Be uninstalling these modules before using this!
 
+## Running service files
+
+Files must be located in `/sdcard/Documents/Node` and running on every boot after 2 minutes.
+
 ## Installing NPM
 
 Since 1.1.4 NPM is useable!
