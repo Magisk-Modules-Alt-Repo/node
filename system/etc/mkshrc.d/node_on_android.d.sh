@@ -7,3 +7,11 @@ if [ ! -d "/usr" ]; then
   sudo ln -s -T /system /usr
 fi
 sudo mount -o ro,remount /
+
+# Ability for npm packages to inject into the environment
+# NPM requires installed (yarn global add npm)
+for rc in $PREFIX/lib/node_modules/*/mkshrc.sh; do
+  if [ -f $rc ]; then
+    . $rc
+  fi
+done
