@@ -1,21 +1,30 @@
 #!/system/bin/sh
 
-if ! command -v npm > /dev/null;then
+if ! command -v npm > /dev/null;then 
     echo "Please install NPM with Yarn over the Node.js Magisk Module"
     exit 1
 fi
+
+install() {
+  $PREFIX/bin/npm install -g "com.googler.$1"
+  for bin in $PREFIX/lib/node_modules/com.googler.$1/bin/*; do
+    if [ -f $bin ]; then
+      echo "Set permission for $bin"
+      chmod 755 $bin
+      chown $USER:$USER $bin
+    fi
+  done
+  unset bin
+}
 
 while [ "${1:-}" != "" ];
 do
    case "$1" in
       "add")
-        $PREFIX/bin/npm install -g "com.googler.$2"
+        install $2
         ;;
       "remove")
         $PREFIX/bin/npm uninstall -g "com.googler.$2"
-        ;;
-      *)
-        echo "Usage $0 add <module>"
         ;;
    esac
    shift
