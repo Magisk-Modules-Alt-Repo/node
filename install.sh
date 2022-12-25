@@ -132,7 +132,7 @@ print_modname() {
     ui_print "======================================="
 }
 
-YARN_HOME=/system/usr/share
+YARN_HOME=$MODPATH/system/usr/share
 SDK_VERSION=$(getprop ro.build.version.sdk)
 MINSDK=23
 
@@ -169,20 +169,20 @@ on_install() {
 
     # Symbolic link for lowercase/UPPERCASE support in terminal
     [ -d "$MODPATH/system/bin/" ] || mkdir -p "$MODPATH/system/bin/"
-    ln -sf node "$MODPATH/system/bin/nodejs"
-    ln -sf node "$MODPATH/system/bin/NODE"
-    ln -sf node "$MODPATH/system/bin/Node"
-    ln -sf node "$MODPATH/system/vendor/bin/node"
-    ln -sf node "$MODPATH/system/vendor/bin/nodejs"
-    ln -sf node "$MODPATH/system/vendor/bin/NODE"
-    ln -sf node "$MODPATH/system/vendor/bin/Node"
-    ln -sf node "$MODPATH/system/system_ext/bin/node"
-    ln -sf node "$MODPATH/system/system_ext/bin/nodejs"
-    ln -sf node "$MODPATH/system/system_ext/bin/NODE"
-    ln -sf node "$MODPATH/system/system_ext/bin/Node"
+    ln -sf node                     $MODPATH/system/bin/nodejs
+    ln -sf node                     $MODPATH/system/bin/NODE
+    ln -sf node                     $MODPATH/system/bin/Node
+    ln -sf $MODPATH/system/bin/node $MODPATH/system/vendor/bin/node
+    ln -sf $MODPATH/system/bin/node $MODPATH/system/vendor/bin/nodejs
+    ln -sf $MODPATH/system/bin/node $MODPATH/system/vendor/bin/NODE
+    ln -sf $MODPATH/system/bin/node $MODPATH/system/vendor/bin/Node
+    ln -sf $MODPATH/system/bin/node $MODPATH/system/system_ext/bin/node
+    ln -sf $MODPATH/system/bin/node $MODPATH/system/system_ext/bin/nodejs
+    ln -sf $MODPATH/system/bin/node $MODPATH/system/system_ext/bin/NODE
+    ln -sf $MODPATH/system/bin/node $MODPATH/system/system_ext/bin/Node
 
     ui_print "- Successfully installed Yarn"
-    version=$($YARN_HOME/.yarn/bin/yarn --version) || (
+    version=$(node $YARN_HOME/.yarn/bin/yarn.js --version) || (
         ui_print "? Yarn was installed, but doesn't seem to be working :(."
     )
     ui_print "- Please reboot where the \"yarn\" command will be available."
@@ -194,12 +194,12 @@ on_install() {
 
 set_permissions() {
     # The following is the default rule, DO NOT remove
-    set_perm_recursive $MODPATH 0 0 0755 0644
-    set_perm $MODPATH/system/bin/node 0 0 0755
-    set_perm $MODPATH/$YARN_HOME/.yarn/bin/yarn 0 0 0755
-    set_perm $MODPATH/$YARN_HOME/.yarn/bin/yarng 0 0 0755
-    set_perm $MODPATH/$YARN_HOME/.yarn/bin/yarn.js 0 0 0755
-    set_perm $MODPATH/$YARN_HOME/.yarn/bin/yarnpkg 0 0 0755
+    set_perm_recursive  $MODPATH                              0     0     0755  0644
+    set_perm            $MODPATH/system/bin/node              0     2000  0755
+    set_perm            $MODPATH/$YARN_HOME/.yarn/bin/yarn    0     2000  0755
+    set_perm            $MODPATH/$YARN_HOME/.yarn/bin/yarng   0     2000  0755
+    set_perm            $MODPATH/$YARN_HOME/.yarn/bin/yarn.js 2000  0     0755
+    set_perm            $MODPATH/$YARN_HOME/.yarn/bin/yarnpkg 2000  0     0755
 
     # Here are some examples:
     # set_perm_recursive  $MODPATH/system/lib       0     0       0755      0644
