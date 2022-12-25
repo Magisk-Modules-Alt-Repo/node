@@ -1,0 +1,22 @@
+#!/system/bin/sh
+
+if ! command -v npm > /dev/null;then
+    echo "Please install NPM with Yarn over the Node.js Magisk Module"
+    exit 1
+fi
+
+while [ "${1:-}" != "" ];
+do
+   case "$1" in
+      "add")
+        $PREFIX/bin/npm install -g "com.googler.$2"
+        ;;
+      "remove")
+        $PREFIX/bin/npm uninstall -g "com.googler.$2"
+        ;;
+      *)
+        echo "Usage $0 add <module>"
+        ;;
+   esac
+   shift
+done
