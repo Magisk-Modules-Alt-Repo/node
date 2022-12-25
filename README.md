@@ -46,6 +46,20 @@ yarn global add npm
 nano $(realpath $(which npm))
 ```
 
+## Googler's Fetcher (grf)
+
+This is an small binary that just executes npm in a short way
+
+### Usage 
+```shell
+grf add wget
+# grf add xh
+# grf add audiotools
+# grf add bash
+```
+More can you find in [Googlers-Repo/addons](https://github.com/Googlers-Repo/addons)
+
+
 ## Module development
 
 If you want develop global libraries for usage use please:
@@ -65,7 +79,8 @@ or this (not recommended)
 ## Installation
 
 Node.js version: 16.15.1
-Yarn version: 1.22.19
+
+Yarn version: 1.23.0
 
 Module can be downloaded from [FoxMMM][foxmmm] or [MMRL][mmrl]. The instalation should be always be in [FoxMMM][foxmmm].
 
