@@ -172,6 +172,14 @@ on_install() {
     ln -sf node "$MODPATH/system/bin/nodejs"
     ln -sf node "$MODPATH/system/bin/NODE"
     ln -sf node "$MODPATH/system/bin/Node"
+    ln -sf node "$MODPATH/system/vendor/bin/node"
+    ln -sf node "$MODPATH/system/vendor/bin/nodejs"
+    ln -sf node "$MODPATH/system/vendor/bin/NODE"
+    ln -sf node "$MODPATH/system/vendor/bin/Node"
+    ln -sf node "$MODPATH/system/system_ext/bin/node"
+    ln -sf node "$MODPATH/system/system_ext/bin/nodejs"
+    ln -sf node "$MODPATH/system/system_ext/bin/NODE"
+    ln -sf node "$MODPATH/system/system_ext/bin/Node"
 
     ui_print "- Successfully installed Yarn"
     version=$($YARN_HOME/.yarn/bin/yarn --version) || (
