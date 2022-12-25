@@ -172,14 +172,14 @@ on_install() {
     ln -sf node                     $MODPATH/system/bin/nodejs
     ln -sf node                     $MODPATH/system/bin/NODE
     ln -sf node                     $MODPATH/system/bin/Node
-    ln -sf $MODPATH/system/bin/node $MODPATH/system/vendor/bin/node
-    ln -sf $MODPATH/system/bin/node $MODPATH/system/vendor/bin/nodejs
-    ln -sf $MODPATH/system/bin/node $MODPATH/system/vendor/bin/NODE
-    ln -sf $MODPATH/system/bin/node $MODPATH/system/vendor/bin/Node
-    ln -sf $MODPATH/system/bin/node $MODPATH/system/system_ext/bin/node
-    ln -sf $MODPATH/system/bin/node $MODPATH/system/system_ext/bin/nodejs
-    ln -sf $MODPATH/system/bin/node $MODPATH/system/system_ext/bin/NODE
-    ln -sf $MODPATH/system/bin/node $MODPATH/system/system_ext/bin/Node
+    ln -sf /system/bin/node         $MODPATH/system/vendor/bin/node
+    ln -sf /system/bin/node         $MODPATH/system/vendor/bin/nodejs
+    ln -sf /system/bin/node         $MODPATH/system/vendor/bin/NODE
+    ln -sf /system/bin/node         $MODPATH/system/vendor/bin/Node
+    ln -sf /system/bin/node         $MODPATH/system/system_ext/bin/node
+    ln -sf /system/bin/node         $MODPATH/system/system_ext/bin/nodejs
+    ln -sf /system/bin/node         $MODPATH/system/system_ext/bin/NODE
+    ln -sf /system/bin/node         $MODPATH/system/system_ext/bin/Node
 
     ui_print "- Successfully installed Yarn"
     version=$(node $YARN_HOME/.yarn/bin/yarn.js --version) || (
