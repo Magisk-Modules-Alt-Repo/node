@@ -1,31 +1,70 @@
 #!/system/bin/sh
 
-if ! command -v npm > /dev/null;then 
+# Isolate the environment
+(
+  function printHelp {
+    echo ""
+    echo "Usage: grf add [library]"
+    echo "\t-a, add     \t Library to be added"
+    echo "\t-r, remove  \t Library to be removed"
+    echo "\t-h. help    \t Prints the help"
+    exit 1 # Exit script after printing help
+  }
+
+  # Checking if core api is available from mkshrc
+  if [ -f /system/usr/share/lib-mkshrc/api/core.sh ]; then
+    source /system/usr/share/lib-mkshrc/api/core.sh
+  else
+    echo "grf was not able to find the core api from mkshrc. Do you have mkshrc installed?"
+    exit 1
+  fi
+
+  if ! command -v npm >/dev/null; then
     echo "Please install NPM with Yarn over the Node.js Magisk Module"
     exit 1
-fi
+  fi
 
-install() {
-  $PREFIX/bin/npm install -g "com.googler.$1"
-  for bin in $PREFIX/lib/node_modules/com.googler.$1/bin/*; do
-    if [ -f $bin ]; then
-      echo "Set permission for $bin"
-      chmod 755 $bin
-      chown $USER:$USER $bin
+  function install {
+    if [ -z "$1" ]; then
+      echo "Please enter an valid library name"
     fi
-  done
-  unset bin
-}
+    $PREFIX/bin/npm install -g "com.googler.$1"
+    for bin in $PREFIX/lib/node_modules/com.googler.$1/bin/*; do
+      if [ -f $bin ]; then
+        echo "Set permission for $bin"
+        set_perm $bin $USER $USER 0755
+      fi
+    done
+    unset bin
+  }
 
-while [ "${1:-}" != "" ];
-do
-   case "$1" in
-      "add")
-        install $2
-        ;;
-      "remove")
-        $PREFIX/bin/npm uninstall -g "com.googler.$2"
-        ;;
-   esac
-   shift
-done
+  function uninstall {
+    if [ -z "$1" ]; then
+      echo "Please enter an valid library name"
+    fi
+    $PREFIX/bin/npm uninstall -g "com.googler.$1"
+  }
+
+  while getopts "s:hm:a:r" opt; do
+    case "$opt" in
+    a) install $OPTARG ;;
+    r) uninstall $OPTARG ;;
+    h) printHelp ;;
+    esac
+  done
+
+  while [ "${1:-}" != "" ]; do
+    case "$1" in
+    "add")
+      install $2
+      ;;
+    "remove")
+      uninstall $2
+      ;;
+    "help")
+      printHelp
+      ;;
+    esac
+    shift
+  done
+)
