@@ -12,8 +12,8 @@
   }
 
   # Checking if core api is available from mkshrc
-  if [ -f /system/usr/share/lib-mkshrc/api/core.sh ]; then
-    source /system/usr/share/lib-mkshrc/api/core.sh
+  if [ ! -z $MKLIB ]; then
+    source $MKLIB/*/*
   else
     echo "grf was not able to find the core api from mkshrc. Do you have mkshrc installed?"
     exit 1
@@ -32,7 +32,7 @@
     for bin in $PREFIX/lib/node_modules/com.googler.$1/bin/*; do
       if [ -f $bin ]; then
         echo "Set permission for $bin"
-        set_perm $bin $USER $USER 0755
+        setperm $bin $USER $USER 0755
       fi
     done
     unset bin
