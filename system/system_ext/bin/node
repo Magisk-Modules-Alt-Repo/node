@@ -1,0 +1,3 @@
+#!/system/bin/sh
+
+exec /system/usr/share/.node/bin/node "$@"

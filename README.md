@@ -24,6 +24,7 @@ Since version `1.1.4` requires this module [Systemless mksh.rc](https://github.c
 
 - Some binaries can't be used when `/system` it not linked into `/usr`. You need to charge from `#!/usr/bin/env node` to `#!/system/bin/env node`
 - `node-gyp` isn't available. Someone need to ports `python`
+	- [Learn more](https://github.com/Magisk-Modules-Alt-Repo/node/wiki/Install-Code-Server-and-run-it) how to make `node-gyp` work
 - Do not update `yarn` itself. This can break the functionality.
 <!-- - Do not use `npm`, you can install it via `yarn global add npm`, but `npm` isn't right configured for Android root usage.-->
 - Please don't execute global installed binaries on boot. This module need link `/system` to `/usr` first!
@@ -31,7 +32,13 @@ Since version `1.1.4` requires this module [Systemless mksh.rc](https://github.c
 
 ## Running service files
 
-Files must be located in `/data/chuser/root/usr/etc/node.d` and running on every boot after 2 minutes.
+Files must be located in `/system/etc/node.d` and running on every boot after 2 minutes.
+
+Valid file extensions:
+
+- `*.js`
+- `*.cjs`
+- `*.mjs`
 
 ## Installing NPM
 

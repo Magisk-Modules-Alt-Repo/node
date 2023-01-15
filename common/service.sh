@@ -17,7 +17,7 @@ notify() {
 }
 
 TITLE="Node.js Service Startup"
-SPATH="/data/chuser/root/usr/etc/node.d"
+SPATH="/system/etc/node.d"
 
 while [[ $(getprop sys.boot_completed) -ne 1 ]]; do
   sleep 1
@@ -31,15 +31,9 @@ if ! command -v nohup >/dev/null; then
   exit 1
 fi
 
-if [ ! -d "$SPATH" ]; then
-  mkdir $SPATH
-  echo "console.log(\"Log!\")" >$SPATH/log.js
-  logi "log.js file has been successfully created"
-fi
-
 if [ -d "$SPATH" ]; then
-  FILE_COUNT=$(ls $SPATH/*.js | wc -l)
-  for script in $SPATH/*.js; do
+  FILE_COUNT=$(ls $SPATH/* | egrep '\.js$|\.cjs$|\.mjs$' | wc -l)
+  for script in $(ls $SPATH/* | egrep '\.js$|\.cjs$|\.mjs$'); do
     if [ -f $script ]; then
       nohup node $script >/dev/null 2>&1 &
       logi "$script has been executed with \"nohup\""
