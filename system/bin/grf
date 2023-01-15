@@ -13,7 +13,7 @@
 
   # Checking if core api is available from mkshrc
   if [ ! -z $MKLIB ]; then
-    source $MKLIB/*/*
+    source $MKLIB/util/setperm.sh
   else
     echo "grf was not able to find the core api from mkshrc. Do you have mkshrc installed?"
     exit 1
