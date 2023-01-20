@@ -1,51 +1,56 @@
-const http = require("http");
-const fs = require('fs').promises;
-const { exec } = require("child_process");
-
+const http = require('http')
+const path = require('path')
+const fs = require('fs');
 const host = '0.0.0.0';
-const port = Math.floor(Math.random() * 9999);
-
-let conf;
+const port = 6970;
+let config;
 try {
-	conf = require('/system/usr/share/.node/server/config.json');
+  config = require('/system/usr/share/.node/server/config.json');
 } catch (e) {
-	if (e.code !== 'MODULE_NOT_FOUND') {
-		throw e;
-	}
-	conf = {
-		location: "/sdcard/Documents/Node",
-		index: "index.html",
-		notify: true
-	}
+  if (e.code !== 'MODULE_NOT_FOUND') {
+    throw e;
+  }
+  config = {
+    location: "/sdcard/Documents/Node",
+    index: "index.html",
+    notify: true
+  }
 }
-
-async function main() {
-	const notification = (message) => {
-		exec(
-			`cmd notification post -S bigtext -t "HTML Server" "${port}" "${message}"`, { uid: 2000 }
-		);
-	};
-
-	const requestListener = function(req, res) {
-		fs.readFile(`${conf.location}/${conf.index}`)
-			.then(contents => {
-				res.setHeader("Content-Type", "text/html");
-				res.writeHead(200);
-				res.end(contents);
-			})
-			.catch(err => {
-				res.writeHead(500);
-				res.end(err);
-				return;
-			});
-	};
-
-	const server = http.createServer(requestListener);
-	server.listen(port, host, () => {
-		if (conf.notify) {
-			notification(`Server is running on http://${host}:${port}`);
-		}
-	});
-}
-
-main()
+const server = http.createServer((req, response) => {
+  console.log("------------------------------------------------------------------");
+  if (req.url == '/') {
+    req.url = `/${config.index}`;
+  }
+  console.log(new Date());
+  console.log("Incoming request: " + req.url);
+  const targetPath = path.normalize(config.location + req.url)
+  const extension = path.extname(targetPath).substr(1);
+  console.log("Absolute target will be : " + targetPath);
+  console.log("Extension is: " + extension);
+  let mimeType = 'text/html';
+  fs.exists(targetPath, (exists) => {
+    if (!exists) {
+      response.writeHead(404, { 'Content-Type': mimeType });
+      response.end("Error 404 - \"" + req.url + "\" not found!");
+    } else {
+        if (extension == 'css') {
+        mimeType = 'text/css';
+      }
+      if (extension == 'js') {
+        mimeType = 'application/x-javascript';
+      }
+      if (extension == 'htm') {
+        mimeType = 'text/html';
+      }
+      if (extension == 'png') {
+        mimeType = 'image/png';
+      }
+      console.log("Using mimeType: " + mimeType);
+      response.writeHead(200, { 'Content-Type': mimeType });
+      fs.createReadStream(targetPath).pipe(response);
+    }
+  });
+});
+server.listen(port, host);
+console.log('Server running');
+console.log(server.address());
