@@ -134,20 +134,19 @@ print_modname() {
 
 YARN_HOME=/system/usr/share/.yarn
 NODE_HOME=/system/usr/share/.node
-SDK_VERSION=$(getprop ro.build.version.sdk)
 MINSDK=23
 
 MODULES=$(magisk --path)/.magisk/modules
 
 require_modules() {
     for module in $@; do
-        [ ! -d "$MODULES/$module" ] && echo "$MODULES/$module is missing, please install it to use this module."
+        [ ! -d "$MODULES/$module" ] && abort "$module is missing, please install it to use this module."
     done
 }
 
 conflicting_modules() {
     for module in $@; do
-        [ -d "$MODULES/$module" ] && echo "$MODULES/$module is installed, please remove it to use this module."
+        [ -d "$MODULES/$module" ] && abort "$module is installed, please remove it to use this module."
     done
 }
 # Copy/extract your module files into $MODPATH in on_install.
@@ -155,7 +154,7 @@ conflicting_modules() {
 on_install() {
     ui_print "- Checking Android SDK version"
     ui_print "- SDK version: $SDK_VERSION"
-    if [ $SDK_VERSION -lt $MINSDK ]; then
+    if [ $API -lt $MINSDK ]; then
         abort "Node.js requires Android 6 and above to work!"
     fi
 
