@@ -1,0 +1,17 @@
+{
+  "name": "android-logger",
+  "version": "1.0.2",
+  "description": "Native Android Logging with Node.js",
+  "main": "index.js",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DerGoogler/android-logger.git"
+  },
+  "author": "Der_Googler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DerGoogler/android-logger/issues"
+  },
+  "homepage": "https://github.com/DerGoogler/android-logger"
+}

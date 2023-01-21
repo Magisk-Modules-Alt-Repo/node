@@ -24,7 +24,7 @@ Since version `1.1.4` requires this module [Systemless mksh.rc](https://github.c
 
 - Some binaries can't be used when `/system` it not linked into `/usr`. You need to charge from `#!/usr/bin/env node` to `#!/system/bin/env node`
 - `node-gyp` isn't available. Someone need to ports `python`
-	- [Learn more](https://github.com/Magisk-Modules-Alt-Repo/node/wiki/Install-Code-Server-and-run-it) how to make `node-gyp` work
+  - [Learn more](https://github.com/Magisk-Modules-Alt-Repo/node/wiki/Install-Code-Server-and-run-it) how to make `node-gyp` work
 - Do not update `yarn` itself. This can break the functionality.
 <!-- - Do not use `npm`, you can install it via `yarn global add npm`, but `npm` isn't right configured for Android root usage.-->
 - Please don't execute global installed binaries on boot. This module need link `/system` to `/usr` first!
@@ -57,15 +57,15 @@ nano $(realpath $(which npm))
 
 This is an small binary that just executes npm in a short way
 
-### Usage 
+### Usage
+
 ```shell
 grf add wget
-# grf add xh
 # grf add audiotools
 # grf add bash
 ```
-More can you find in [Googlers-Repo/addons](https://github.com/Googlers-Repo/addons)
 
+More can you find in [Googlers-Repo/addons](https://github.com/Googlers-Repo/addons)
 
 ## Module development
 
@@ -89,9 +89,15 @@ Node.js version: 16.15.1
 
 Yarn version: 1.23.0
 
-Module can be downloaded from [FoxMMM][foxmmm] or [MMRL][mmrl]. The instalation should be always be in [FoxMMM][foxmmm].
+Module can be downloaded from [FoxMMM][foxmmm]. The instalation should be always be in [FoxMMM][foxmmm].
 
 **Included binaries**
 
 - `yarn`
 - `node`
+- `xh`
+
+**Pre-installed libraries**
+
+- `android-logger`
+  - GCC is no necessary, it's prebuilt.

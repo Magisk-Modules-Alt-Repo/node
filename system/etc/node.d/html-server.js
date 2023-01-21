@@ -1,56 +1,63 @@
-const http = require('http')
-const path = require('path')
-const fs = require('fs');
-const host = '0.0.0.0';
-const port = 6970;
+const http = require("http");
+const path = require("path");
+const fs = require("fs");
+const Logger = require("android-logger");
+const log = new Logger({ debug: false });
+const TAG = "HTML-Server";
 let config;
 try {
-  config = require('/system/usr/share/.node/server/config.json');
+  config = require("/sdcard/node.server.json");
 } catch (e) {
-  if (e.code !== 'MODULE_NOT_FOUND') {
+  if (e.code !== "MODULE_NOT_FOUND") {
     throw e;
   }
   config = {
-    location: "/sdcard/Documents/Node",
+    host: "0.0.0.0",
+    port: 6970,
+    root: "/system/usr/share/.node/server/www",
     index: "index.html",
-    notify: true
-  }
+  };
 }
 const server = http.createServer((req, response) => {
-  console.log("------------------------------------------------------------------");
-  if (req.url == '/') {
+  log.i(TAG, "------------------------------------------------------------------");
+  if (req.url == "/") {
     req.url = `/${config.index}`;
   }
-  console.log(new Date());
-  console.log("Incoming request: " + req.url);
-  const targetPath = path.normalize(config.location + req.url)
+  log.i(TAG, new Date());
+  log.i(TAG, "Incoming request: " + req.url);
+  const targetPath = path.normalize(config.location + req.url);
   const extension = path.extname(targetPath).substr(1);
-  console.log("Absolute target will be : " + targetPath);
-  console.log("Extension is: " + extension);
-  let mimeType = 'text/html';
+  log.i(TAG, "Absolute target will be : " + targetPath);
+  log.i(TAG, "Extension is: " + extension);
+  let mimeType = "text/html";
   fs.exists(targetPath, (exists) => {
     if (!exists) {
-      response.writeHead(404, { 'Content-Type': mimeType });
-      response.end("Error 404 - \"" + req.url + "\" not found!");
+      response.writeHead(404, { "Content-Type": mimeType });
+      response.end('Error 404 - "' + req.url + '" not found!');
+      log.e(TAG, `"${req.url}" not found!`);
     } else {
-        if (extension == 'css') {
-        mimeType = 'text/css';
+      if (extension == "css") {
+        mimeType = "text/css";
       }
-      if (extension == 'js') {
-        mimeType = 'application/x-javascript';
+      if (extension == "js") {
+        mimeType = "application/x-javascript";
       }
-      if (extension == 'htm') {
-        mimeType = 'text/html';
+      if (extension == "htm") {
+        mimeType = "text/html";
       }
-      if (extension == 'png') {
-        mimeType = 'image/png';
+      if (extension == "png") {
+        mimeType = "image/png";
       }
-      console.log("Using mimeType: " + mimeType);
-      response.writeHead(200, { 'Content-Type': mimeType });
+      log.i(TAG, "Using mimeType: " + mimeType);
+      response.writeHead(200, { "Content-Type": mimeType });
       fs.createReadStream(targetPath).pipe(response);
     }
   });
 });
-server.listen(port, host);
-console.log('Server running');
-console.log(server.address());
+
+try {
+  server.listen(config.port, config.host);
+  log.i(TAG, "Server running");
+} catch (e) {
+  log.e(TAG, e?.message);
+}
