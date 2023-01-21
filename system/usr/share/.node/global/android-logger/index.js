@@ -1,7 +1,6 @@
 const { __native_logger } = require("./native/__native_logger.node");
 const { Transform } = require("stream");
 const { Console } = require("console");
-
 /**
  * @typedef {Object} Options
  * @property {boolean} debug - enables debug logging
@@ -27,7 +26,7 @@ class Logger extends __native_logger {
     if (!tag || !msg) throw new Error("Tag or message is undefined");
     // Log only if debug has been enabled
     if (this._opt.debug) {
-      super.d(tag, msg);
+      super.d(String(tag), String(msg));
     }
   }
   /**
@@ -37,7 +36,7 @@ class Logger extends __native_logger {
    */
   e(tag, msg) {
     if (!tag || !msg) throw new Error("Tag or message is undefined");
-    super.e(tag, msg);
+    super.e(String(tag), String(msg));
   }
   /**
    * Send a INFO log message
@@ -46,7 +45,7 @@ class Logger extends __native_logger {
    */
   i(tag, msg) {
     if (!tag || !msg) throw new Error("Tag or message is undefined");
-    super.i(tag, msg);
+    super.i(String(tag), String(msg));
   }
   /**
    * Send a VERBOSE log message
@@ -55,7 +54,7 @@ class Logger extends __native_logger {
    */
   v(tag, msg) {
     if (!tag || !msg) throw new Error("Tag or message is undefined");
-    super.v(tag, msg);
+    super.v(String(tag), String(msg));
   }
   /**
    * Send a WARN log message
@@ -64,7 +63,7 @@ class Logger extends __native_logger {
    */
   w(tag, msg) {
     if (!tag || !msg) throw new Error("Tag or message is undefined");
-    super.w(tag, msg);
+    super.w(String(tag), String(msg));
   }
   /**
    * Send a DEBUG log message
@@ -75,7 +74,7 @@ class Logger extends __native_logger {
     if (!tag || !msg) throw new Error("Tag or message is undefined");
     // Log only if debug has been enabled
     if (this._opt.debug) {
-      super.d(tag, msg);
+      super.d(String(tag), String(msg));
     }
   }
   /**
@@ -85,7 +84,7 @@ class Logger extends __native_logger {
    */
   error(tag, msg) {
     if (!tag || !msg) throw new Error("Tag or message is undefined");
-    super.e(tag, msg);
+    super.e(String(tag), String(msg));
   }
   /**
    * Send a INFO log message
@@ -94,7 +93,7 @@ class Logger extends __native_logger {
    */
   info(tag, msg) {
     if (!tag || !msg) throw new Error("Tag or message is undefined");
-    super.i(tag, msg);
+    super.i(String(tag), String(msg));
   }
   /**
    * Send a VERBOSE log message
@@ -103,7 +102,7 @@ class Logger extends __native_logger {
    */
   verbose(tag, msg) {
     if (!tag || !msg) throw new Error("Tag or message is undefined");
-    super.v(tag, msg);
+    super.v(String(tag), String(msg));
   }
   /**
    * Send a WARN log message
@@ -112,7 +111,7 @@ class Logger extends __native_logger {
    */
   warn(tag, msg) {
     if (!tag || !msg) throw new Error("Tag or message is undefined");
-    super.w(tag, msg);
+    super.w(String(tag), String(msg));
   }
   /**
    * Send a INFO log message
@@ -138,7 +137,7 @@ class Logger extends __native_logger {
       r = r.replace(/'/g, " ");
       result += `${r}\n`;
     }
-    super.i(tag, result);
+    super.i(String(tag), String(result));
   }
 }
 module.exports = Logger;
