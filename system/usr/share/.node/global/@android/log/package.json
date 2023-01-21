@@ -1,5 +1,5 @@
 {
-  "name": "android-logger",
+  "name": "@android/log",
   "version": "1.0.2",
   "description": "Native Android Logging with Node.js",
   "main": "index.js",

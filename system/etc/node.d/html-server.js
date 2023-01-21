@@ -1,8 +1,7 @@
 const http = require("http");
 const path = require("path");
 const fs = require("fs");
-const Logger = require("android-logger");
-const log = new Logger({ debug: false });
+const { log } = require("@android/log");
 const TAG = "HTML-Server";
 let config;
 try {

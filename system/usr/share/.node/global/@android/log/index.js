@@ -6,7 +6,7 @@ const { Console } = require("console");
  * @property {boolean} debug - enables debug logging
  * Class to log into Android's logger.
  */
-class Logger extends __native_logger {
+class Log extends __native_logger {
   _opt = undefined;
   /**
    * @param {Options=} opt
@@ -140,4 +140,5 @@ class Logger extends __native_logger {
     super.i(String(tag), String(result));
   }
 }
-module.exports = Logger;
+const log = new Log();
+module.exports = { Log, log };
