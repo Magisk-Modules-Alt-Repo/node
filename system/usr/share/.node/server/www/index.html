@@ -2,9 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Node.js for Android</title>
-    <link rel="stylesheet" href="assets/github-markdown-dark.css" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover" />
+    <link rel="stylesheet" type="text/css" href="assets/css/github-markdown-dark.css" />
   </head>
   <body>
     <style>
@@ -27,16 +29,10 @@
       const xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-          document.querySelector(".markdown-body").innerHTML = marked.parse(
-            xhttp.responseText
-          );
+          document.querySelector(".markdown-body").innerHTML = marked.parse(xhttp.responseText);
         }
       };
-      xhttp.open(
-        "GET",
-        "https://raw.githubusercontent.com/Magisk-Modules-Alt-Repo/node/master/README.md",
-        true
-      );
+      xhttp.open("GET", "https://raw.githubusercontent.com/Magisk-Modules-Alt-Repo/node/master/README.md", true);
       xhttp.send();
     </script>
   </body>

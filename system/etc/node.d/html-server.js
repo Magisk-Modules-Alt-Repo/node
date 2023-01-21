@@ -24,7 +24,7 @@ const server = http.createServer((req, response) => {
   }
   log.i(TAG, new Date());
   log.i(TAG, "Incoming request: " + req.url);
-  const targetPath = path.normalize(config.location + req.url);
+  const targetPath = path.normalize(config.root + req.url);
   const extension = path.extname(targetPath).substr(1);
   log.i(TAG, "Absolute target will be : " + targetPath);
   log.i(TAG, "Extension is: " + extension);
