@@ -1,0 +1,17 @@
+{
+  "name": "@android/keycheck",
+  "version": "1.0.1",
+  "description": "Dectecting key events with Node.js",
+  "main": "index.js",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DerGoogler/android-keycheck.git"
+  },
+  "author": "Der_Googler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DerGoogler/android-keycheck/issues"
+  },
+  "homepage": "https://github.com/DerGoogler/android-keycheck"
+}
