@@ -1,39 +1,32 @@
 const http = require("http");
 const path = require("path");
 const fs = require("fs");
-const { log } = require("@android/log");
+const { Log } = require("@android/util");
+const { SystemProperties } = require("@android/os");
 const TAG = "HTML-Server";
-let config;
-try {
-  config = require("/sdcard/node.server.json");
-} catch (e) {
-  if (e.code !== "MODULE_NOT_FOUND") {
-    throw e;
-  }
-  config = {
-    host: "0.0.0.0",
-    port: 6970,
-    root: "/system/usr/share/.node/server/www",
-    index: "index.html",
-  };
-}
+const config = {
+  host: SystemProperties.get("persist.node.conf.html_server.host", "0.0.0.0"),
+  port: SystemProperties.getNumber("persist.node.conf.html_server.port", 6970),
+  root: SystemProperties.get("persist.node.conf.html_server.root", "/system/usr/share/.node/server/www"),
+  index: SystemProperties.get("persist.node.conf.html_server.index", "index.html"),
+};
 const server = http.createServer((req, response) => {
-  log.i(TAG, "------------------------------------------------------------------");
+  Log.i(TAG, "------------------------------------------------------------------");
   if (req.url == "/") {
     req.url = `/${config.index}`;
   }
-  log.i(TAG, new Date());
-  log.i(TAG, "Incoming request: " + req.url);
+  Log.i(TAG, new Date());
+  Log.i(TAG, "Incoming request: %s", req.url);
   const targetPath = path.normalize(config.root + req.url);
   const extension = path.extname(targetPath).substr(1);
-  log.i(TAG, "Absolute target will be : " + targetPath);
-  log.i(TAG, "Extension is: " + extension);
+  Log.i(TAG, "Absolute target will be : %s", targetPath);
+  Log.i(TAG, "Extension is: %s", extension);
   let mimeType = "text/html";
   fs.exists(targetPath, (exists) => {
     if (!exists) {
       response.writeHead(404, { "Content-Type": mimeType });
-      response.end('Error 404 - "' + req.url + '" not found!');
-      log.e(TAG, `"${req.url}" not found!`);
+      response.end('Error 404 - "%s" not found!', req.url);
+      Log.e(TAG, `"${req.url}" not found!`);
     } else {
       if (extension == "css") {
         mimeType = "text/css";
@@ -47,7 +40,7 @@ const server = http.createServer((req, response) => {
       if (extension == "png") {
         mimeType = "image/png";
       }
-      log.i(TAG, "Using mimeType: " + mimeType);
+      Log.i(TAG, "Using mimeType: %s", mimeType);
       response.writeHead(200, { "Content-Type": mimeType });
       fs.createReadStream(targetPath).pipe(response);
     }
@@ -56,7 +49,7 @@ const server = http.createServer((req, response) => {
 
 try {
   server.listen(config.port, config.host);
-  log.i(TAG, "Server running");
+  Log.i(TAG, "Server running");
 } catch (e) {
-  log.e(TAG, e?.message);
+  Log.e(TAG, e?.message);
 }

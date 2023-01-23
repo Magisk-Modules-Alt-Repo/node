@@ -3,21 +3,21 @@ argv0=$(echo "$0" | sed -e 's,\\,/,g')
 basedir=$(dirname "$(readlink "$0" || echo "$argv0")")
 
 case "$(uname -s)" in
-  Darwin) basedir="$( cd "$( dirname "$argv0" )" && pwd )";;
-  Linux) basedir=$(dirname "$(readlink -f "$0" || echo "$argv0")");;
-  *CYGWIN*) basedir=`cygpath -w "$basedir"`;;
-  *MSYS*) basedir=`cygpath -w "$basedir"`;;
+Darwin) basedir="$(cd "$(dirname "$argv0")" && pwd)" ;;
+Linux) basedir=$(dirname "$(readlink -f "$0" || echo "$argv0")") ;;
+*CYGWIN*) basedir=$(cygpath -w "$basedir") ;;
+*MSYS*) basedir=$(cygpath -w "$basedir") ;;
 esac
 
 command_exists() {
-  command -v "$1" >/dev/null 2>&1;
+  command -v "$1" >/dev/null 2>&1
 }
 
 if command_exists node; then
   if [ "$YARN_FORCE_WINPTY" = 1 ] || command_exists winpty && test -t 1; then
-    winpty node "$basedir/yarn.js" "global $@"
+    winpty node "$basedir/yarn.js" "$@"
   else
-    exec node "$basedir/yarn.js" "global $@"
+    exec node "$basedir/yarn.js" "$@"
   fi
   ret=$?
 # Debian and Ubuntu use "nodejs" as the name of the binary, not "node", so we
@@ -28,7 +28,7 @@ elif command_exists nodejs; then
   exec nodejs "$basedir/yarn.js" "$@"
   ret=$?
 else
-  >&2 echo 'Yarn requires Node.js 4.0 or higher to be installed.'
+  echo >&2 'Yarn requires Node.js 4.0 or higher to be installed.'
   ret=1
 fi
 

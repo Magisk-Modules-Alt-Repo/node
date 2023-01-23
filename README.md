@@ -101,3 +101,54 @@ Module can be downloaded from [FoxMMM][foxmmm]. The instalation should be always
 
 - `android-logger`
   - GCC is no necessary, it's prebuilt.
+
+# Node API
+
+## Get some properties..
+
+```javascript
+// get.mjs
+import { SystemProperties, Build } from "@android/os";
+
+
+const id = SystemProperties..get("ro.build.id");
+console.log(id);
+// alternatively can you use:
+console.log(Build.ID)
+```
+
+## Logging
+
+Logging in JavaScript is 1:1 the same as in Java
+
+```javascript
+// log.mjs
+import { Log } from "@android/util";
+
+const TAG = "TEST";
+
+Log.i(TAG, "Logging from JavaScript, %s!", "Kevin");
+```
+
+Check in logs
+
+```shell
+logcat -s TEST:*
+```
+
+# Node Server
+
+This module includes an simple server...
+
+## Configuration
+
+Available configuration types:
+
+- `host` | default: **0.0.0.0**
+- `port` | default: **6970**
+- `root` | default: **/system/usr/share/.node/server/www**
+- `index` | default: **index.html**
+
+```shell
+setprop persist.node.conf.html_server.<type> [value]
+```

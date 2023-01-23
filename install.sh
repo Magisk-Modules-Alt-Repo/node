@@ -132,8 +132,9 @@ print_modname() {
     ui_print "======================================="
 }
 
-YARN_HOME=/system/usr/share/.yarn
-NODE_HOME=/system/usr/share/.node
+YARN_HOME=/system/usr/share/yarn
+NODE_HOME=/system/usr/share/node
+SDK_VERSION=$(getprop ro.build.version.sdk)
 MINSDK=23
 
 MODULES=$(magisk --path)/.magisk/modules
@@ -154,7 +155,7 @@ conflicting_modules() {
 on_install() {
     ui_print "- Checking Android SDK version"
     ui_print "- SDK version: $SDK_VERSION"
-    if [ $API -lt $MINSDK ]; then
+    if [ $SDK_VERSION -lt $MINSDK ]; then
         abort "Node.js requires Android 6 and above to work!"
     fi
 
@@ -172,9 +173,6 @@ on_install() {
     # ln -sf node                     $MODPATH/system/bin/nodejs
 
     ui_print "- Successfully installed Yarn"
-    version=$($MODPATH/$NODE_HOME/bin/node $MODPATH/$YARN_HOME/.yarn/bin/yarn.js --version) || (
-        ui_print "? Yarn was installed, but doesn't seem to be working :(."
-    )
     ui_print "- Please reboot where the \"yarn\" command will be available."
 }
 
