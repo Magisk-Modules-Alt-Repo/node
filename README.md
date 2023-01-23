@@ -107,9 +107,7 @@ Module can be downloaded from [FoxMMM][foxmmm]. The instalation should be always
 ## Get some properties..
 
 ```javascript
-// get.mjs
-import { SystemProperties, Build } from "@android/os";
-
+const { SystemProperties, Build } =require("@android/os");
 
 const id = SystemProperties..get("ro.build.id");
 console.log(id);
@@ -122,8 +120,7 @@ console.log(Build.ID)
 Logging in JavaScript is 1:1 the same as in Java
 
 ```javascript
-// log.mjs
-import { Log } from "@android/util";
+const { Log } = require("@android/util");
 
 const TAG = "TEST";
 

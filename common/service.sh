@@ -1,25 +1,24 @@
 #!/system/bin/sh
-logi() {
-  if command -v log >/dev/null; then
-    log -p i "$1" -t "nodejs"
-  fi
-}
-loge() {
-  if command -v log >/dev/null; then
-    log -p e "$1" -t "nodejs"
-  fi
-}
-notify() {
-  su -lp 2000 -c "cmd notification post -S bigtext -t '$1' '$RANDOM' '$2'"
-}
-TITLE="Node.js Service Startup"
-SPATH="/system/etc/node.d"
-while [[ $(getprop sys.boot_completed) -ne 1 ]]; do
-  sleep 1
-done
-sleep 120
-# Isolate the service
 (
+  logi() {
+    if command -v log >/dev/null; then
+      log -p i "$1" -t "nodejs"
+    fi
+  }
+  loge() {
+    if command -v log >/dev/null; then
+      log -p e "$1" -t "nodejs"
+    fi
+  }
+  notify() {
+    su -lp 2000 -c "cmd notification post -S bigtext -t '$1' '$RANDOM' '$2'"
+  }
+  TITLE="Node.js Service Startup"
+  SPATH="/system/etc/node.d"
+  while [[ $(getprop sys.boot_completed) -ne 1 ]]; do
+    sleep 1
+  done
+  sleep 120
   if [ -f "/system/etc/mkshrc" ]; then
     source /system/etc/mkshrc
   fi

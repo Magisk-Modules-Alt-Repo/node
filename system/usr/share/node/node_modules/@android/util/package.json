@@ -2,7 +2,7 @@
   "name": "@android/util",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "author": "Der_Googler",
   "license": "MIT"
 }
