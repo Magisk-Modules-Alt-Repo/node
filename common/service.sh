@@ -14,7 +14,8 @@ notify() {
 
 main() {
   local TITLE="Node.js Service Startup"
-  local SPATH="/system/etc/node.d"
+  local NODE_D="/system/etc/node.d"
+  local NODE_D_USER="/data/adb/node.d"
   
   if ! command -v nohup >/dev/null; then
     notify "$TITLE" "The \"nohup\" binary was not found! Please ensure you have it installed."
@@ -22,17 +23,31 @@ main() {
     exit 1
   fi
   
-  if [ -d "$SPATH" ]; then
-    FILE_COUNT=$(ls $SPATH/* | egrep '\.js$|\.cjs$|\.mjs$' | wc -l)
-    for script in $(ls $SPATH/* | egrep '\.js$|\.cjs$|\.mjs$'); do
-      if [ -f $script ]; then
-        nohup node $script >/dev/null 2>&1 &
-        log "i" "$script has been executed with \"nohup\""
+  notify "$TITLE" "Start executing scripts in /system/etc/node.d and /data/adb/node.d"
+ 
+  if [ -d "$NODE_D_USER" ]; then
+    for script_u in $(ls $NODE_D_USER/* | egrep '\.js$|\.cjs$|\.mjs$'); do
+      if [ -f $script_u ]; then
+        nohup node $script_u >/dev/null 2>&1 &
+        log "i" "$script_u has been executed with \"nohup\""
       fi
     done
-    notify "$TITLE" "$FILE_COUNT file/s has been detected, unknown if all has been executed."
-    log "i" "$FILE_COUNT file/s has been detected"
+  else
+    log "w" "unable to find $NODE_D_USER folder"
   fi
+  
+  if [ -d "$NODE_D" ]; then
+    for script_s in $(ls $NODE_D/* | egrep '\.js$|\.cjs$|\.mjs$'); do
+      if [ -f $script_s ]; then
+        nohup node $script_s >/dev/null 2>&1 &
+        log "i" "$script_s has been executed with \"nohup\""
+      fi
+    done
+  else
+    log "w" "unable to find $NODE_D folder"
+  fi
+  
+  unset script_s script_u
 }
 
 while [[ $(getprop sys.boot_completed) -ne 1 ]]; do
