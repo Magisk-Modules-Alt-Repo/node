@@ -7,7 +7,7 @@ const TAG = "HTML-Server";
 const config = {
   host: SystemProperties.get("persist.node.conf.html_server.host", "0.0.0.0"),
   port: SystemProperties.getNumber("persist.node.conf.html_server.port", 6970),
-  root: SystemProperties.get("persist.node.conf.html_server.root", "/system/usr/share/.node/server/www"),
+  root: SystemProperties.get("persist.node.conf.html_server.root", "/system/usr/share/node/server/www"),
   index: SystemProperties.get("persist.node.conf.html_server.index", "index.html"),
 };
 const server = http.createServer((req, response) => {
