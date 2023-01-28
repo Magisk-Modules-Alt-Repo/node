@@ -85,7 +85,7 @@ or this (not recommended)
 
 ## Installation
 
-Node.js version: 16.18.1
+Node.js version: 16.15.1
 
 Yarn version: 1.23.0
 
@@ -95,12 +95,6 @@ Module can be downloaded from [FoxMMM][foxmmm]. The instalation should be always
 
 - `yarn`
 - `node`
-- `xh`
-
-**Pre-installed libraries**
-
-- `android-logger`
-  - GCC is no necessary, it's prebuilt.
 
 # Node API
 

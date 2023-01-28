@@ -168,10 +168,6 @@ on_install() {
     conflicting_modules terminalmods
     require_modules mkshrc
 
-    ui_print "- Installing for $ARCH"
-    mv node-$ARCH $MODPATH/system/usr/share/node/bin/node
-    rm -rf $MODPATH/system/usr/share/node/bin/placeholder
-
     # Symbolic link for lowercase/UPPERCASE support in terminal
     [ -d "$MODPATH/system/bin/" ] || mkdir -p "$MODPATH/system/bin/"
     # ln -sf node                     $MODPATH/system/bin/nodejs
