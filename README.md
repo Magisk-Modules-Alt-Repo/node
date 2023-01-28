@@ -85,7 +85,7 @@ or this (not recommended)
 
 ## Installation
 
-Node.js version: 16.15.1
+Node.js version: 16.18.1
 
 Yarn version: 1.23.0
 
