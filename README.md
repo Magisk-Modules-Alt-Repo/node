@@ -101,9 +101,9 @@ Module can be downloaded from [FoxMMM][foxmmm]. The instalation should be always
 ## Get some properties..
 
 ```javascript
-const { SystemProperties, Build } =require("@android/os");
+const { SystemProperties, Build } = require("android");
 
-const id = SystemProperties..get("ro.build.id");
+const id = SystemProperties.get("ro.build.id");
 console.log(id);
 // alternatively can you use:
 console.log(Build.ID)
@@ -114,7 +114,7 @@ console.log(Build.ID)
 Logging in JavaScript is 1:1 the same as in Java
 
 ```javascript
-const { Log } = require("@android/util");
+const { Log } = require("android");
 
 const TAG = "TEST";
 
@@ -137,7 +137,7 @@ Available configuration types:
 
 - `host` | default: **0.0.0.0**
 - `port` | default: **6970**
-- `root` | default: **/system/usr/share/.node/server/www**
+- `root` | default: **/system/usr/share/node/server/www**
 - `index` | default: **index.html**
 
 ```shell
