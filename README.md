@@ -106,7 +106,15 @@ const { SystemProperties, Build } = require("android");
 const id = SystemProperties.get("ro.build.id");
 console.log(id);
 // alternatively can you use:
-console.log(Build.ID)
+console.log(Build.ID);
+
+// List props
+const props = SystemProperties.list();
+// With own callback
+// SystemProperties.list((prop)=> {
+//   console.log(prop)
+// });
+console.log(props);
 ```
 
 ## Logging
@@ -127,19 +135,29 @@ Check in logs
 logcat -s TEST:*
 ```
 
-# Node Server
+## Environment
 
-This module includes an simple server...
+Logging in JavaScript is 1:1 the same as in Java
 
-## Configuration
+```javascript
+const { Environment } = require("android");
 
-Available configuration types:
+const user = Environment.whoami();
+const rootfs = Environment.rootfs();
+const home = Environment.homedir();
+const tmp = Environment.tmpdir();
 
-- `host` | default: **0.0.0.0**
-- `port` | default: **6970**
-- `root` | default: **/system/usr/share/node/server/www**
-- `index` | default: **index.html**
+console.log({
+  user,
+  home,
+  rootfs,
+  tmp,
+});
 
-```shell
-setprop persist.node.conf.html_server.<type> [value]
+// 'System.getenv()' is deprecated
+const home = Environment.getenv("HOME");
+console.log(home);
 ```
+
+> ROOTFS is customizable via `setprop`    
+> Example: `setprop persist.mkshrc.rootfs /data/<NEW_NAME>`

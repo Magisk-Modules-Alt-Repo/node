@@ -1,9 +1,9 @@
 id=node_on_android
 name=Node.js
-version=1.4.6
-versionCode=146
+version=1.4.7
+versionCode=147
 author=Der_Googler
-description=Running Node.js on a Android device
+description=Node.js is a cross-platform, open-source server environment that can run on Windows, Linux, Unix, macOS, and more.
 minApi=23
 needRamdisk=false
 support=https://github.com/Magisk-Modules-Alt-Repo/node
