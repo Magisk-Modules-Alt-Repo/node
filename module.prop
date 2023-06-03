@@ -8,3 +8,4 @@ minApi=23
 needRamdisk=false
 support=https://github.com/Magisk-Modules-Alt-Repo/node
 changeBoot=false
+image=https://nodejs.org/static/images/logo-light.svg
