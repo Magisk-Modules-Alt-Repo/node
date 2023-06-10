@@ -1,0 +1,28 @@
+name: release
+
+on:
+  push:
+    tags: [ v*.*.* ]
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build     
+        run: |
+          zip -r "${{ env.NAME }}-release.zip" . -x ".git" "README.md" ".github" ".gitignore"
+      - id: get_version
+        uses: battila7/get-version-action@v2
+
+      - name: Publish
+        uses: softprops/action-gh-release@v1
+        with:
+          files: '${{ env.NAME }}*'
+          draft: true
+
+        env:
+          NAME: 'node'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,7 +1,7 @@
 id=node_on_android
 name=Systemless Node.js
-version=1.4.8
-versionCode=148
+version=1.4.9
+versionCode=149
 author=Der_Googler
 description=Node.js is a cross-platform, open-source server environment that can run on Windows, Linux, Unix, macOS, and more.
 minApi=23
