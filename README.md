@@ -5,8 +5,7 @@
   <a href="https://nodejs.org/" noIcon>
     <img
       alt="Node.js"
-      src="https://nodejs.org/static/images/logo-light.svg"
-      width="400"
+      src="https://github.com/DerGoogler/cdn/blob/master/images/Node.js.Cover.png?raw=true"
     />
   </a>
 </p>
