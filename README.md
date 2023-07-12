@@ -2,7 +2,7 @@
 [foxmmm]: https://github.com/Fox2Code/FoxMagiskModuleManager
 
 <p align="center">
-  <a href="https://nodejs.org/">
+  <a href="https://nodejs.org/" noIcon>
     <img
       alt="Node.js"
       src="https://nodejs.org/static/images/logo-light.svg"
