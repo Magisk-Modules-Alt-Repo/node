@@ -8,4 +8,5 @@ minApi=23
 needRamdisk=false
 support=https://github.com/Magisk-Modules-Alt-Repo/node
 changeBoot=false
+mmrlAuthor=hAMzj76XkySDLDnK97GBTRjP1Vy1
 mmrlCover=https://github.com/DerGoogler/cdn/blob/master/images/Node.js.Cover.png?raw=true
