@@ -1,7 +1,7 @@
 id=node_on_android
 name=Systemless Node.js
-version=1.4.9
-versionCode=149
+version=1.5.0
+versionCode=150
 author=Der_Googler
 description=Node.js is a cross-platform, open-source server environment that can run on Windows, Linux, Unix, macOS, and more.
 minApi=23
@@ -11,3 +11,4 @@ changeBoot=false
 mmrlLogo=https://raw.githubusercontent.com/nodejs/nodejs.org/main/public/static/images/logo-hexagon.svg
 mmrlAuthor=FGPqXIzgATOwXrThZ7duE3AJnet2
 mmrlCover=https://github.com/DerGoogler/cdn/blob/master/images/Node.js.Cover.png?raw=true
+mmrlCategories=Tools,Coding,Configurable,System
