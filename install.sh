@@ -137,7 +137,7 @@ NODE_HOME=/system/usr/share/node
 SDK_VERSION=$(getprop ro.build.version.sdk)
 MINSDK=23
 
-MODULES=$(magisk --path)/.magisk/modules
+MODULES=/data/adb/modules
 
 require_modules() {
     for module in $@; do
