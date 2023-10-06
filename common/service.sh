@@ -1,5 +1,7 @@
 #!/system/bin/sh
 
+MODPATH=${0%/*}
+
 _getprop() {
 	exec /system/bin/getprop $@
 }
@@ -8,12 +10,12 @@ NODE_PATH="$NODE_PATH:/system/usr/share/node/node_modules"
 
 ROOTFS=$(_getprop "persist.mkshrc.rootfs" "/data/mkuser")
 DISABLE_SERVICE=$(_getprop "persist.nodejs.service" "true")
+DESC_TEXT=$(_getprop "persist.nodejs.desc" "true")
 DISABLE_NOTIFY=$(_getprop "persist.nodejs.notify" "true")
 ENABLE_LOGGING=$(_getprop "persist.nodejs.logging" "false")
 
 PIDS_DIR="$ROOTFS/var/nodeservice"
 PIDS_FILE="$PIDS_DIR/pids.prop"
-
 
 _log() {
 	if [ "$ENABLE_LOGGING" = "true" ];then
@@ -95,6 +97,12 @@ main() {
 		_log "w" "unable to find $NODE_D folder"
 	fi
 
+   if [ "$DESC_TEXT" = "true" ];then
+      local SERVICE_COUNT=$((`ls -1 $NODE_D_USER | wc -l` + `ls -1 $NODE_D | wc -l`))
+      cp "$MODPATH/module.prop" "$MODPATH/temp.prop"
+      sed -Ei "s/^description=(\[.*][[:space:]]*)?/description=[$SERVICE_COUNT Service] /g" "$MODPATH/temp.prop"
+      mv "$MODPATH/temp.prop" "$MODPATH/module.prop"
+   fi
 	unset script_s script_u
 }
 
