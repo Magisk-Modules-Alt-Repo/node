@@ -19,6 +19,14 @@
 
 Since version `1.1.4` requires this module [Systemless mksh.rc](https://github.com/Magisk-Modules-Alt-Repo/mkshrc) to be installed.
 
+## Installation
+
+Via [MMRL](https://github.com/DerGoogler/MMRL) or via the [MMRL CLI](https://github.com/DerGoogler/MMRL-CLI)
+
+```shell
+mmrl install -yr node_on_android
+```
+
 ## Information
 
 - Some binaries can't be used when `/system` it not linked into `/usr`. You need to charge from `#!/usr/bin/env node` to `#!/system/bin/env node`
