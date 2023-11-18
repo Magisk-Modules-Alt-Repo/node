@@ -3,7 +3,7 @@
 MODPATH=${0%/*}
 
 _getprop() {
-	exec /system/bin/getprop $@
+	exec /system/bin/getprop $@ | sed 's/^"\(.*\)"$/\1/'
 }
 
 NODE_PATH="$NODE_PATH:/system/usr/share/node/node_modules"
