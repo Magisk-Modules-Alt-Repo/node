@@ -1,0 +1,13 @@
+{
+    "title": "Configure Node.js",
+    "service": "Service",
+    "report_issue": "Report a issue",
+    "project": "Project",
+    "logging": "Logging",
+    "s_up_notify": "Start up notification",
+    "desc_notice": "Description notice",
+    "desc_notice_sub": "Shows a text in the module description and shows how many service scripts are running",
+    "service_title": "Service",
+    "service_desc": "Enable start up scripts"
+  }
+  

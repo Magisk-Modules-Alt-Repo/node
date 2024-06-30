@@ -2,17 +2,32 @@
 
 MODPATH=${0%/*}
 
-_getprop() {
-	exec /system/bin/getprop $@ | sed 's/^"\(.*\)"$/\1/'
+get_conf_from_file() {
+    local file="$1"
+	local default_value="$3"
+    local value
+    if [ -f "$file" ]; then
+        value=$(sed -n "s|^$2 = ||p" "$file" 2>/dev/null)
+        if [ -z "$value" ]; then
+            echo "$default_value"
+        else
+            echo "$value"
+        fi
+    else
+        echo "$default_value"
+    fi
 }
+
+node_on_android() { echo "$(get_conf_from_file "/data/adb/mmrl/node_on_android.prop" "$1" "$2")"; }
+mkshrc() { echo "$(get_conf_from_file "/data/adb/mmrl/mkshrc.prop" "$1" "$2")"; }
 
 NODE_PATH="$NODE_PATH:/system/usr/share/node/node_modules"
 
-ROOTFS=$(_getprop "persist.mkshrc.rootfs" "/data/mkuser")
-DISABLE_SERVICE=$(_getprop "persist.nodejs.service" "true")
-DESC_TEXT=$(_getprop "persist.nodejs.desc" "true")
-DISABLE_NOTIFY=$(_getprop "persist.nodejs.notify" "true")
-ENABLE_LOGGING=$(_getprop "persist.nodejs.logging" "false")
+ROOTFS=$(mkshrc "rootfs" "/data/mkuser")
+ENABLE_SERVICE=$(node_on_android "service" "true")
+DESC_TEXT=$(node_on_android "desc" "true")
+DISABLE_NOTIFY=$(node_on_android "notify" "true")
+ENABLE_LOGGING=$(node_on_android "logging" "false")
 
 PIDS_DIR="$ROOTFS/var/nodeservice"
 PIDS_FILE="$PIDS_DIR/pids.prop"
@@ -111,4 +126,7 @@ while [[ $(getprop sys.boot_completed) -ne 1 ]]; do
 done
 
 sleep 120
-main "$@"
+
+if [ "$ENABLE_SERVICE" = "true" ]; then
+	main "$@"
+fi
