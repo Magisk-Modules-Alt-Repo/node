@@ -19,19 +19,23 @@ NODE_HOME=/system/usr/share/node
 SDK_VERSION=$(getprop ro.build.version.sdk)
 MINSDK=23
 
-MODULES=/data/adb/modules
+findRequire() {
+    local id="$1"  # Get the ID passed to the function
 
-require_modules() {
-    for module in $@; do
-        [ ! -d "$MODULES/$module" ] && abort "$module is missing, please install it to use this module."
-    done
+    # Check if the ID exists in BULK_MODULES
+    local id_in_bulk=$(echo "$BULK_MODULES" | grep -qw "$id" && echo "true" || echo "false")
+
+    # Check if the directory exists
+    local id_dir_exists=$( [ -d "/data/adb/modules/$id" ] && echo "true" || echo "false" )
+
+    # Return true only if both conditions are met
+    if [ "$id_in_bulk" = "true" ] || [ "$id_dir_exists" = "true" ]; then
+        echo "true"
+    else
+        echo "false"
+    fi
 }
 
-conflicting_modules() {
-    for module in $@; do
-        [ -d "$MODULES/$module" ] && abort "$module is installed, please remove it to use this module."
-    done
-}
 
 on_install() {
     ui_print "- Checking Android SDK version"
@@ -43,8 +47,9 @@ on_install() {
     ui_print "- Extracting module files"
     unzip -o "$ZIPFILE" 'system/*' -d $MODPATH >&2
 
-    conflicting_modules terminalmods
-    require_modules mkshrc
+    if [ "$(findRequire mkshrc)" = "false" ]; then
+        echo "! Unable to find Systemless Mkshrc is missing. Cannot find in /data/adb/modules or \$BULK_MODULES"
+    fi
 
     [ -d "$MODPATH/system/bin/" ] || mkdir -p "$MODPATH/system/bin/"
 
